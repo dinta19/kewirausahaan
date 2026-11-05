@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 450" width="600" height="450" role="img" aria-label="Carabiner logam serbaguna dengan cincin gantungan kunci">
+  <defs>
+    <linearGradient id="studioBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#EDE6DA" />
+      <stop offset="100%" stop-color="#E2D9C8" />
+    </linearGradient>
+    <linearGradient id="steelBody" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F8FAFC" />
+      <stop offset="35%" stop-color="#CBD5E1" />
+      <stop offset="70%" stop-color="#64748B" />
+      <stop offset="100%" stop-color="#94A3B8" />
+    </linearGradient>
+    <linearGradient id="steelDark" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#475569" />
+      <stop offset="100%" stop-color="#1E293B" />
+    </linearGradient>
+    <radialGradient id="floorShadow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#221F1C" stop-opacity="0.22" />
+      <stop offset="100%" stop-color="#221F1C" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+
+  <!-- Studio Surface Backdrop -->
+  <rect width="600" height="450" fill="url(#studioBg)" />
+
+  <!-- Soft Contact Shadow -->
+  <ellipse cx="300" cy="382" rx="135" ry="20" fill="url(#floorShadow)" />
+
+  <!-- Metal Carabiner Assembly -->
+  <g transform="translate(300, 205)">
+    <!-- Top Loop & Spine -->
+    <path
+      d="M -46 -98 C -46 -138, 46 -138, 46 -98 L 58 52 C 58 102, -58 102, -58 52 Z"
+      fill="none"
+      stroke="url(#steelBody)"
+      stroke-width="24"
+      stroke-linejoin="round"
+    />
+    <path
+      d="M -46 -98 C -46 -138, 46 -138, 46 -98 L 58 52 C 58 102, -58 102, -58 52 Z"
+      fill="none"
+      stroke="#334155"
+      stroke-width="1.5"
+      stroke-opacity="0.45"
+    />
+
+    <!-- Spring Gate (Red Anodized Accent) -->
+    <line x1="48" y1="-64" x2="55" y2="26" stroke="#B01C22" stroke-width="9" stroke-linecap="round" />
+    <circle cx="48" cy="-64" r="7" fill="url(#steelDark)" />
+    <circle cx="55" cy="26" r="7" fill="url(#steelDark)" />
+
+    <!-- Center Crossbar & Pivot -->
+    <rect x="-36" y="-16" width="72" height="30" rx="15" fill="url(#steelDark)" stroke="url(#steelBody)" stroke-width="8" />
+    <circle cx="0" cy="-1" r="6" fill="#E2E8F0" />
+
+    <!-- Dual Split Keyrings at Bottom -->
+    <circle cx="-22" cy="102" r="26" fill="none" stroke="url(#steelBody)" stroke-width="7" />
+    <circle cx="24" cy="102" r="26" fill="none" stroke="url(#steelBody)" stroke-width="7" />
+  </g>
+</svg>

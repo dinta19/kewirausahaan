@@ -1,0 +1,775 @@
+/* ==========================================================================
+   STYLE.CSS — Ekstensi Halaman Produk untuk Taste-Skill 2.5 (design-taste-frontend)
+   Proyek : Landing Page Lanyard + Carabiner SI Telkom University Jakarta
+   Tim    : Kelompok 5 (Minangkabau United)
+   ========================================================================== */
+
+/* 1. Skip link sesuai spesifikasi system.md Base (tidak menggeser logo di header) */
+.skip-link {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link:focus-visible {
+  width: auto;
+  height: auto;
+  clip-path: none;
+  top: 12px;
+  left: var(--gut);
+  z-index: 100;
+  padding: var(--s-2) var(--s-4);
+  background: var(--action);
+  color: var(--action-ink);
+  border-radius: var(--r-sm);
+}
+
+/* 1b. Indikator Garis Bawah Navbar Saat Section Aktif (Scroll-Spy) */
+.nav__link::after {
+  content: "";
+  position: absolute;
+  left: var(--s-3);
+  right: var(--s-3);
+  bottom: -2px;
+  height: 2px;
+  border-radius: 2px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform var(--dur) var(--ease);
+  pointer-events: none;
+}
+
+.nav__link[aria-current="page"]::after,
+.nav__link.is-active::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+@media (min-width: 1024px) and (max-width: 1279px) {
+  .nav__link::after {
+    left: var(--s-2);
+    right: var(--s-2);
+  }
+}
+
+@media (max-width: 1023px) {
+  .nav.is-open .nav__link::after {
+    left: 0;
+    right: auto;
+    width: 24px;
+    bottom: 10px;
+  }
+}
+
+/* 2. Ritme Satu Section Per Layar & Proteksi Responsif Mobile (Mobile & Desktop)
+   - Mencegah h1.ly-locked dari layout.js memaksa white-space: nowrap yang membuat
+     lebar halaman meluber di layar HP.
+   - Menjaga tinggi 1H / 2H di desktop, sementara di HP/tablet tinggi mengikuti
+     isi konten agar tidak muncul ruang kosong berlebih di bawah gambar Hero. */
+html,
+body {
+  overflow-x: clip;
+  max-width: 100%;
+}
+
+h1.ly-locked,
+.hero h1 {
+  white-space: normal !important;
+  text-wrap: balance !important;
+  max-width: 100%;
+}
+
+h1.ly-locked br.ly-br {
+  display: none !important;
+}
+
+.wrap,
+.hero-text,
+.hero-copy,
+.hero-visual {
+  min-width: 0;
+  max-width: 100%;
+}
+
+main > :is(.hero, .section--hero) {
+  height: auto;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+}
+
+main > :is(.hero, .section--hero) > .wrap {
+  flex: 1 0 auto;
+  height: auto;
+}
+
+main > :is(section, .section):not(.hero, .section--hero),
+footer.closing {
+  height: auto;
+  min-height: calc(var(--h, 1) * 100svh);
+  display: flex;
+  flex-direction: column;
+}
+
+main > :is(section, .section):not(.hero, .section--hero) > :is(.wrap, .container),
+footer.closing > .wrap {
+  flex: 1 0 auto;
+  height: auto;
+  min-height: 0;
+}
+
+@media (max-width: 1023px) {
+  main > :is(.hero, .section--hero),
+  main > :is(section, .section):not(.hero, .section--hero),
+  footer.closing {
+    height: auto !important;
+    min-height: 0 !important;
+  }
+
+  main > :is(.hero, .section--hero) > .wrap {
+    flex: none;
+    height: auto !important;
+    display: block;
+  }
+
+  .hero-text.hero-split {
+    height: auto !important;
+    gap: var(--s-5);
+  }
+
+  .hero-split > .hero-visual {
+    flex: none !important;
+    height: auto !important;
+    min-height: 0 !important;
+  }
+}
+
+/* 3. Frame Mockup Produk di Hero & Menu Card */
+.menu-card .panel {
+  --p-h: 200px;
+  background: #ffffff;
+}
+
+.menu-card .panel > .frame__img {
+  object-fit: contain;
+  padding: var(--s-3);
+}
+
+.hero-mockup-frame {
+  background: #ffffff;
+  border: 1px solid var(--line);
+  min-height: 440px;
+}
+
+.hero-mockup-frame > .frame__img.hero-product-img {
+  object-fit: contain;
+  padding: var(--s-5);
+}
+
+/* 3b. Panel Diagram Interaktif & Loop Stepper (tasteskill 2.5 House Rule #7 & motion.md) */
+.diagram-feature-card {
+  gap: var(--s-4);
+}
+
+.diagram-feature-card__head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--s-3);
+  flex-wrap: wrap;
+}
+
+.diagram-panel {
+  --p-h: auto;
+  min-height: 272px;
+  padding: var(--s-5) var(--s-5) var(--s-6) !important;
+  background-color: var(--bg) !important;
+  background-image: radial-gradient(circle, color-mix(in oklab, var(--ink) 15%, transparent) 1px, transparent 1.25px) !important;
+  background-size: 16px 16px !important;
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.clipsi-flow {
+  position: relative;
+  width: 100%;
+  height: 240px;
+  display: grid;
+  grid-template-columns: 28% 22% 28%;
+  justify-content: space-between;
+  align-items: stretch;
+  z-index: 1;
+}
+
+.clipsi-flow__svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.clipsi-flow__line {
+  fill: none;
+  stroke: color-mix(in oklab, var(--ink) 20%, transparent);
+  stroke-width: 1.6;
+}
+
+.clipsi-flow__port {
+  fill: var(--bg);
+  stroke: color-mix(in oklab, var(--ink) 32%, transparent);
+  stroke-width: 1.6;
+}
+
+/* Catatan SVG:
+   - Gunakan stroke warna solid var(--accent) + pathLength="100" agar garis
+     horizontal lurus di lane #2 (KC) tetap menampilkan animasi merah sama
+     terangnya dengan jalur melengkung di lane #1 (ID) & #3 (FD).
+   - Gunakan stroke-dasharray: 28 240 (gap > 2x pathLength) dan satu timeline
+     siklus terpadu (--clipsi-cycle: 3.6s) tanpa animation-delay terpisah:
+     1) 0% - 34%  : Jalur Kiri (01 & 02 -> Clipsi 2-in-1) berjalan sampai habis
+     2) 28% - 46% : Inti Clipsi 2-in-1 menyala menerima & meneruskan aliran
+     3) 36% - 74% : Jalur Kanan (Clipsi 2-in-1 -> ID, KC, FD) berjalan sampai habis
+     4) 64% - 88% : Ketiga kartu kanan menyala saat aliran tiba, lalu jeda sebelum
+                    jalur kiri mulai lagi di 0% siklus berikutnya. */
+.clipsi-flow {
+  --clipsi-cycle: 3.6s;
+}
+
+.clipsi-flow__pulse {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 2.8;
+  stroke-linecap: round;
+  stroke-dasharray: 28 240;
+  stroke-dashoffset: 28;
+  opacity: 0;
+  filter: drop-shadow(0 0 3px color-mix(in oklab, var(--accent) 45%, transparent));
+}
+
+.clipsi-flow__pulse--in1,
+.clipsi-flow__pulse--in2 {
+  animation: clipsiPulseIn var(--clipsi-cycle, 3.6s) linear infinite;
+}
+
+.clipsi-flow__pulse--out1,
+.clipsi-flow__pulse--out2,
+.clipsi-flow__pulse--out3 {
+  animation: clipsiPulseOut var(--clipsi-cycle, 3.6s) linear infinite;
+}
+
+@keyframes clipsiPulseIn {
+  0% {
+    stroke-dashoffset: 28;
+    opacity: 0;
+  }
+  4% {
+    opacity: 1;
+  }
+  29% {
+    opacity: 1;
+  }
+  34%,
+  100% {
+    stroke-dashoffset: -100;
+    opacity: 0;
+  }
+}
+
+@keyframes clipsiPulseOut {
+  0%,
+  35% {
+    stroke-dashoffset: 28;
+    opacity: 0;
+  }
+  40% {
+    opacity: 1;
+  }
+  69% {
+    opacity: 1;
+  }
+  74%,
+  100% {
+    stroke-dashoffset: -100;
+    opacity: 0;
+  }
+}
+
+.clipsi-flow__col {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+}
+
+.clipsi-flow__col--in {
+  justify-content: space-around;
+  height: 100%;
+}
+
+.clipsi-flow__col--core {
+  align-items: stretch;
+  justify-content: center;
+  height: 100%;
+}
+
+.clipsi-flow__col--out {
+  justify-content: space-between;
+  height: 100%;
+}
+
+.clipsi-node {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  padding: 10px 14px;
+  border-radius: var(--r-md);
+  background: var(--surface);
+  border: 1px solid var(--line-strong);
+  box-shadow: 0 1px 2px rgb(0 0 0 / 0.05), 0 8px 18px -12px rgb(0 0 0 / 0.18);
+  transition: border-color 220ms var(--ease), box-shadow 220ms var(--ease), transform 220ms var(--ease);
+}
+
+.clipsi-node:hover {
+  border-color: var(--accent);
+  transform: translateY(-1px);
+}
+
+.clipsi-node__icon {
+  flex: none;
+  width: 30px;
+  height: 30px;
+  border-radius: var(--r-sm);
+  background: color-mix(in oklab, var(--accent) 12%, var(--bg));
+  color: var(--accent);
+  font: 600 12px/1 var(--font-text);
+  display: grid;
+  place-items: center;
+}
+
+.clipsi-node__text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.clipsi-node__text strong {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink);
+  line-height: 1.2;
+}
+
+.clipsi-node__text span {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.25;
+}
+
+.clipsi-node__check {
+  margin-left: auto;
+  flex: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: var(--accent-ink);
+  font-size: 11px;
+  font-weight: 700;
+  display: grid;
+  place-items: center;
+}
+
+.clipsi-core {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--s-3);
+  padding: 16px 18px;
+  border-radius: var(--r-md);
+  background: var(--p-inv-bg);
+  color: var(--p-inv-ink);
+  border: 1px solid color-mix(in oklab, var(--accent) 55%, transparent);
+  box-shadow: 0 0 0 4px color-mix(in oklab, var(--accent) 10%, transparent), 0 12px 26px -12px rgb(0 0 0 / 0.35);
+  animation: clipsiCoreGlow var(--clipsi-cycle, 3.6s) linear infinite;
+}
+
+@keyframes clipsiCoreGlow {
+  0%,
+  22%,
+  52%,
+  100% {
+    box-shadow: 0 0 0 4px color-mix(in oklab, var(--accent) 10%, transparent), 0 12px 26px -12px rgb(0 0 0 / 0.35);
+  }
+  34%,
+  40% {
+    box-shadow: 0 0 0 9px color-mix(in oklab, var(--accent) 24%, transparent), 0 14px 30px -10px rgb(0 0 0 / 0.42);
+  }
+}
+
+.clipsi-core__text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.clipsi-core__text strong {
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.clipsi-core__text span {
+  font-size: 12px;
+  color: var(--p-inv-muted);
+  line-height: 1.2;
+}
+
+.clipsi-node--in1,
+.clipsi-node--in2 {
+  animation: clipsiNodeInHit var(--clipsi-cycle, 3.6s) linear infinite;
+}
+
+.clipsi-node--out1,
+.clipsi-node--out2,
+.clipsi-node--out3 {
+  animation: clipsiNodeOutHit var(--clipsi-cycle, 3.6s) linear infinite;
+}
+
+@keyframes clipsiNodeInHit {
+  0%,
+  16% {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px color-mix(in oklab, var(--accent) 16%, transparent), 0 8px 18px -12px rgb(0 0 0 / 0.22);
+  }
+  26%,
+  100% {
+    border-color: var(--line-strong);
+    box-shadow: 0 1px 2px rgb(0 0 0 / 0.05), 0 8px 18px -12px rgb(0 0 0 / 0.18);
+  }
+}
+
+@keyframes clipsiNodeOutHit {
+  0%,
+  60%,
+  92%,
+  100% {
+    border-color: var(--line-strong);
+    box-shadow: 0 1px 2px rgb(0 0 0 / 0.05), 0 8px 18px -12px rgb(0 0 0 / 0.18);
+  }
+  68%,
+  80% {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px color-mix(in oklab, var(--accent) 18%, transparent), 0 8px 18px -12px rgb(0 0 0 / 0.22);
+  }
+}
+
+.is-m-paused .clipsi-flow__pulse,
+.is-m-paused .clipsi-core,
+.is-m-paused .clipsi-node {
+  animation-play-state: paused !important;
+}
+
+/* Responsif Diagram Alur Integrasi di Tablet & HP:
+   Tetap mempertahankan 3 kolom horizontal + garis SVG & animasi cahaya merah
+   agar pengguna HP tetap melihat alur integrasi bergerak dari Kiri -> Tengah -> Kanan. */
+@media (max-width: 767px) {
+  .diagram-panel {
+    min-height: 204px;
+    padding: var(--s-3) var(--s-2) !important;
+  }
+
+  .clipsi-flow {
+    height: 184px;
+    grid-template-columns: 28% 22% 28%;
+  }
+
+  .clipsi-flow__col--out {
+    padding-block: 6px;
+  }
+
+  .clipsi-node {
+    padding: 6px 7px;
+    gap: 5px;
+    border-radius: var(--r-sm);
+  }
+
+  .clipsi-node__icon {
+    width: 18px;
+    height: 18px;
+    font-size: 9px;
+    border-radius: 4px;
+  }
+
+  .clipsi-node__text strong {
+    font-size: 10px;
+    line-height: 1.15;
+  }
+
+  .clipsi-node__text span,
+  .clipsi-node__check {
+    display: none;
+  }
+
+  .clipsi-core {
+    flex-direction: column;
+    padding: 8px 6px;
+    gap: 4px;
+    text-align: center;
+    border-radius: var(--r-sm);
+  }
+
+  .clipsi-core .mark {
+    width: 15px;
+    height: 15px;
+  }
+
+  .clipsi-core__text strong {
+    font-size: 10.5px;
+    line-height: 1.15;
+  }
+
+  .clipsi-core__text span {
+    font-size: 8.5px;
+    line-height: 1.15;
+  }
+}
+
+.steps-loop-grid {
+  position: relative;
+}
+
+@media (max-width: 639px) {
+  .hero-mockup-frame {
+    min-height: 260px;
+    max-height: 320px;
+  }
+
+  .hero-mockup-frame > .frame__img.hero-product-img {
+    padding: var(--s-4);
+  }
+
+  .tabs {
+    width: 100%;
+    overflow-x: auto;
+    max-width: 100%;
+  }
+
+  .tabs .tab {
+    flex: 1 1 auto;
+    text-align: center;
+    white-space: nowrap;
+    padding-inline: var(--s-3);
+    font-size: 13px;
+  }
+}
+
+/* 4. Showcase Desain Lanyard (#02 Topographic & #04 Heritage)
+   min-width: 0 + max-width: 100% memastikan kartu tidak meluber melewati layar HP
+   ketika menampilkan pita desain di mode "Bandingkan Keduanya". */
+.design-grid > .design-card {
+  min-width: 0;
+  max-width: 100%;
+  gap: var(--s-4);
+}
+
+.design-grid.is-single > .design-card:not([hidden]) {
+  grid-column: 1 / -1;
+}
+
+.design-card__head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--s-3);
+  flex-wrap: wrap;
+}
+
+.lanyard-strip-group {
+  display: grid;
+  gap: var(--s-4);
+  min-width: 0;
+  max-width: 100%;
+  margin-block: var(--s-2);
+}
+
+.lanyard-strip-box {
+  display: grid;
+  gap: var(--s-2);
+  min-width: 0;
+  max-width: 100%;
+}
+
+.strip-scroll {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  background: #ffffff;
+  border-radius: var(--r-md);
+  padding: var(--s-4) var(--s-3);
+  border: 1px solid var(--line);
+}
+
+.strip-image {
+  display: block;
+  width: 100%;
+  min-width: 640px;
+  height: auto;
+}
+
+.carabiner-note-bar,
+.po-ZeroWaste-bar {
+  margin-top: var(--s-6);
+  padding: var(--s-5);
+  border-radius: var(--r-lg);
+  background: var(--card);
+  border: 1px solid var(--line);
+}
+
+.segmen-subblock {
+  margin-top: var(--s-8);
+  padding-top: var(--s-7);
+  border-top: 1px solid var(--line);
+  scroll-margin-top: calc(var(--nav, 72px) + var(--s-6));
+}
+
+/* 5. Kartu Paket Produk & Banner Bulk Order */
+.package-media {
+  position: relative;
+  height: 210px;
+  border-radius: var(--r-md);
+  background: #ffffff;
+  border: 1px solid var(--line);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.package-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.package-img--contain {
+  object-fit: contain;
+  padding: var(--s-3);
+}
+
+.package-img--strip {
+  object-fit: contain;
+  padding: var(--s-4);
+}
+
+.bulk-card {
+  margin-top: var(--s-6);
+  background: var(--surface);
+}
+
+.bulk-card__grid {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-5);
+  flex-wrap: wrap;
+}
+
+.bulk-card__grid > :first-child {
+  max-width: 64ch;
+}
+
+/* 6. Tabel Perbandingan (Mengapa Pilih Kami) */
+.comparison-scroll {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  background: var(--bg);
+}
+
+.comparison-table {
+  width: 100%;
+  min-width: 720px;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: var(--t-body);
+}
+
+.comparison-table th,
+.comparison-table td {
+  padding: var(--s-4) var(--s-5);
+  border-bottom: 1px solid var(--line);
+  vertical-align: top;
+}
+
+.comparison-table tbody tr:last-child th,
+.comparison-table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.comparison-table thead th {
+  font-weight: 500;
+  font-size: var(--t-small);
+  color: var(--muted);
+  background: var(--surface);
+}
+
+.comparison-table thead th.is-ours {
+  background: var(--action);
+  color: var(--action-ink);
+}
+
+.comparison-table tbody th {
+  font-weight: 500;
+  color: var(--ink);
+  width: 22%;
+}
+
+.comparison-table tbody td.is-ours {
+  background: color-mix(in oklab, var(--accent) 7%, var(--bg));
+}
+
+/* 7. Showcase Katalog di Footer Close */
+.catalog-showcase-media {
+  background: #ffffff;
+  min-height: 260px;
+}
+
+.catalog-showcase-media > img {
+  object-fit: contain;
+  padding: var(--s-4);
+}
+
+/* 8. Kotak Fallback Gambar bila File di assets/images/ Belum Tersedia */
+.img-fallback-placeholder {
+  width: 100%;
+  min-height: 140px;
+  padding: var(--s-4);
+  border: 1px dashed var(--line-strong);
+  border-radius: var(--r-md);
+  background: var(--surface);
+  color: var(--ink);
+  display: grid;
+  place-items: center;
+  text-align: center;
+  gap: var(--s-1);
+  font-size: var(--t-small);
+}
