@@ -146,8 +146,17 @@ footer.closing > .wrap {
 
   .hero-split > .hero-visual {
     flex: none !important;
+    width: 100%;
     height: auto !important;
-    min-height: 0 !important;
+    min-height: 300px !important;
+  }
+
+  .hero-mockup-frame > .frame__img.hero-product-img {
+    position: relative;
+    inset: auto;
+    width: 100%;
+    height: auto;
+    max-height: 360px;
   }
 }
 
@@ -489,35 +498,47 @@ footer.closing > .wrap {
    agar pengguna HP tetap melihat alur integrasi bergerak dari Kiri -> Tengah -> Kanan. */
 @media (max-width: 767px) {
   .diagram-panel {
-    min-height: 204px;
+    min-height: 224px;
     padding: var(--s-3) var(--s-2) !important;
   }
 
   .clipsi-flow {
-    height: 184px;
+    height: 204px;
     grid-template-columns: 28% 22% 28%;
   }
 
   .clipsi-flow__col--out {
-    padding-block: 6px;
+    padding-block: 4px;
   }
 
   .clipsi-node {
-    padding: 6px 7px;
-    gap: 5px;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 5px 7px;
+    gap: 3px;
     border-radius: var(--r-sm);
+    overflow: hidden;
   }
 
   .clipsi-node__icon {
-    width: 18px;
-    height: 18px;
-    font-size: 9px;
-    border-radius: 4px;
+    width: auto;
+    min-width: 18px;
+    height: 15px;
+    padding-inline: 4px;
+    font-size: 8.5px;
+    border-radius: 3px;
+  }
+
+  .clipsi-node__text {
+    width: 100%;
   }
 
   .clipsi-node__text strong {
-    font-size: 10px;
-    line-height: 1.15;
+    display: block;
+    font-size: 9.5px;
+    line-height: 1.18;
+    overflow-wrap: break-word;
   }
 
   .clipsi-node__text span,
@@ -527,24 +548,26 @@ footer.closing > .wrap {
 
   .clipsi-core {
     flex-direction: column;
-    padding: 8px 6px;
+    padding: 8px 4px;
     gap: 4px;
     text-align: center;
     border-radius: var(--r-sm);
+    overflow: hidden;
   }
 
   .clipsi-core .mark {
-    width: 15px;
-    height: 15px;
+    width: 14px;
+    height: 14px;
   }
 
   .clipsi-core__text strong {
-    font-size: 10.5px;
+    font-size: 9.5px;
     line-height: 1.15;
+    white-space: nowrap;
   }
 
   .clipsi-core__text span {
-    font-size: 8.5px;
+    font-size: 8px;
     line-height: 1.15;
   }
 }
@@ -554,12 +577,12 @@ footer.closing > .wrap {
 }
 
 @media (max-width: 639px) {
-  .hero-mockup-frame {
-    min-height: 260px;
-    max-height: 320px;
+  .hero-split > .hero-visual.hero-mockup-frame {
+    min-height: 280px !important;
   }
 
   .hero-mockup-frame > .frame__img.hero-product-img {
+    max-height: 300px;
     padding: var(--s-4);
   }
 
