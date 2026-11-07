@@ -90,6 +90,10 @@ h1.ly-locked br.ly-br {
   display: none !important;
 }
 
+.ly-word {
+  overflow: hidden !important;
+}
+
 .wrap,
 .hero-text,
 .hero-copy,

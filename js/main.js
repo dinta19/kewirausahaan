@@ -362,10 +362,14 @@ function initTasteskillMotionFallbacks() {
   // C. Live Word di Hero H1 ([data-ly-word]) — aktif di HP (< 640px) maupun saat file://
   setTimeout(() => {
     document.querySelectorAll("[data-ly-word]").forEach((slot) => {
+      if (slot.dataset.mobileLoopBound === "1") return;
       const alreadyMountedByLayout = Boolean(slot.querySelector("span"));
       // Jika sudah di-mount oleh layout.js di layar desktop (>= 640px), biarkan layout.js yang menjalankan
       if (alreadyMountedByLayout && window.innerWidth >= 640) return;
+      // Jika dibuka lewat http/https namun layout.js belum selesai download ui.js, tunggu sampai layout.js mount span-nya
+      if (!alreadyMountedByLayout && window.location.protocol !== "file:") return;
 
+      slot.dataset.mobileLoopBound = "1";
       let spans = Array.from(slot.querySelectorAll("span"));
       if (!spans.length) {
         let words;
@@ -410,7 +414,7 @@ function initTasteskillMotionFallbacks() {
       };
       runCycle();
     });
-  }, 240);
+  }, 700);
 
   // D. Sliding Pill Indicator pada Tab Desain (.tabs[role="tablist"]) bila motion.js belum jalan
   setTimeout(() => {
